@@ -12,6 +12,7 @@ jobs:
     strategy:
       matrix:
         node-version: [18.x, 20.x]
+
     steps:
       - uses: actions/checkout@v4
 
@@ -25,6 +26,8 @@ jobs:
 
       - name: Run Unit Tests
         run: node test.js
+        env:
+          WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY }}
 
       - name: Run Security Check
         run: node app.js
@@ -34,6 +37,7 @@ jobs:
   package:
     needs: build-and-test
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
 
